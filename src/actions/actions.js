@@ -7,15 +7,17 @@ const ACTION_DONE = '@@saga@@/actionDone';
 const ACTION_DONE_OK = '@@saga@@/actionDoneOk';
 
 const changeAction = (value, key) => {
+    console.log("CHANGE ACTION");
     return {
         type: CHANGE_VALUES,
         payload: {
-            value: key
+            value, key
         }
     }
 }
 
 const addValue = (value) => {
+    console.log("ADD ACTION");
     return {
         type: ADD_VALUES,
         payload: {
@@ -25,6 +27,7 @@ const addValue = (value) => {
 }
 
 const removeValue = (index) => {
+    console.log("REMOVE ACTION");
     return {
         type: REMOVE_VALUES,
         payload: {
@@ -34,12 +37,14 @@ const removeValue = (index) => {
 }
 
 const startAction = () => {
+    console.log("START ACTION");
     return {
         type: ACTION_LOAD
     }
 }
 
 const doneAction = () => {
+    console.log("DONE ACTION");
     return {
         type: ACTION_DONE_OK
     }

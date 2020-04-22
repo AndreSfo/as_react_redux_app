@@ -5,6 +5,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import makeStyles from '@material-ui/styles/makeStyles';
 import React, { useEffect, useRef } from 'react';
 import { addValue, changeAction, doneAction, startAction, removeValue } from './actions/actions';
+import { selector10 } from './selectors/selectors';
 import { connect } from 'react-redux';
 
 const useStyles = makeStyles( (theme) => {
@@ -69,10 +70,10 @@ const Sfo = function Sfo(props) {
       <Paper elevation={10} className={classes.header}>
         <Grid container>
           <Grid item xs={12} className={classes.item}>
-            <TextField variant={'standard'} label={"Valore 1"} value={form.v1} onChanghe={(event) => props.dispatch(changeAction(event.target.value, 'v1'))} />
+            <TextField variant={'standard'} label={"Valore 1"} value={form.v1} onChange={(event) => props.dispatch(changeAction(event.target.value, 'v1'))} />
           </Grid>
           <Grid item xs={12} className={classes.item}>
-            <TextField variant={'standard'} label={"Valore 2"} value={form.v2} onChanghe={(event) => props.dispatch(changeAction(event.target.value, 'v2'))} />
+            <TextField variant={'standard'} label={"Valore 2"} value={form.v2} onChange={(event) => props.dispatch(changeAction(event.target.value, 'v2'))} />
           </Grid>
         </Grid>
         <Grid container>

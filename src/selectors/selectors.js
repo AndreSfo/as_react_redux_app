@@ -1,4 +1,5 @@
-import { createSelector, createStructuredSelector } from "@reduxjs/toolkit";
+import { createSelector } from "@reduxjs/toolkit";
+import { createStructuredSelector } from 'reselect';
 
 const selector1 = state => state.v1;
 
