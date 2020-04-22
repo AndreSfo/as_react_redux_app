@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react';
-import { addValue, changeAction, doneAction, startAction } from './actions/actions';
-import { Snackbar, Backdrop, CircularProgress, Paper, Typography, Grid, TextField, Button, Tooltip, IconButton, List } from '@material-ui/core';
-import makeStyles from '@material-ui/styles/makeStyles';
+import { Backdrop, Button, CircularProgress, Grid, IconButton, List, Paper, Snackbar, TextField, Tooltip, Typography } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import MuiAlert from '@material-ui/lab/Alert';
+import makeStyles from '@material-ui/styles/makeStyles';
+import React, { useEffect, useRef } from 'react';
+import { addValue, changeAction, doneAction, startAction } from './actions/actions';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles( (theme) => {
     return {
@@ -13,6 +14,9 @@ const useStyles = makeStyles( (theme) => {
       },
       backdrop: {
         color: '#FFF'
+      },
+      item: {
+        margin: '10px'
       }
     }
 });
@@ -46,31 +50,31 @@ const Sfo = function Sfo(props) {
           TEST APP
         </Typography>
         <Grid container>
-          <Grid item>
+          <Grid item className={classes.item}>
             <TextField variant={'standard'} label={"Max"} value={max} disabled />
           </Grid>
-          <Grid item>
+          <Grid item className={classes.item}>
             <TextField variant={'standard'} label={"Somma"} value={sum} disabled />
           </Grid>
-          <Grid item>
+          <Grid item className={classes.item}>
             <Button variant={'outlined'} color={'primary'} onClick={() => props.dispatch(startAction())}>Calcola</Button>
           </Grid>
         </Grid>
       </Paper>
-      <Paper elevation={10}>
+      <Paper elevation={10} className={classes.header}>
         <Grid container>
-          <Grid item xs={12}>
-            <TextField variant={'standard'} label={"Value 1"} value={form.v1} onChanghe={(event) => props.dispatch(changeAction(event.target.value, 'v1'))} />
+          <Grid item xs={12} className={classes.item}>
+            <TextField variant={'standard'} label={"Valore 1"} value={form.v1} onChanghe={(event) => props.dispatch(changeAction(event.target.value, 'v1'))} />
           </Grid>
-          <Grid item xs={12}>
-            <TextField variant={'standard'} label={"Value 2"} value={form.v2} onChanghe={(event) => props.dispatch(changeAction(event.target.value, 'v2'))} />
+          <Grid item xs={12} className={classes.item}>
+            <TextField variant={'standard'} label={"Valore 2"} value={form.v2} onChanghe={(event) => props.dispatch(changeAction(event.target.value, 'v2'))} />
           </Grid>
         </Grid>
         <Grid container>
-          <Grid item>
+          <Grid item className={classes.item}>
             <TextField variant={'standard'} label={"VALORE"} inputRef={ref} />
           </Grid>
-          <Grid item>
+          <Grid item className={classes.item}>
             <Tooltip title="Aggiungi valore">
               <IconButton color="primary" aria-label="upload picture" coponent="span" onClick={() => props.dispatch(addValue(ref.target.value))}>
                 <AddCircleIcon fontSize="large" />
@@ -94,4 +98,14 @@ const Sfo = function Sfo(props) {
   )
 };
 
-export default Sfo;
+const mapStateToProps = state => {
+  return {
+    max: 0,
+    sum: 0,
+    form: state.form,
+    values: state.values,
+    saga: state.sagaStatus
+  }
+}
+
+export default connect(mapStateToProps)(Sfo);
