@@ -1,9 +1,10 @@
-import { Backdrop, Button, CircularProgress, Grid, IconButton, List, Paper, Snackbar, TextField, Tooltip, Typography } from '@material-ui/core';
+import { Backdrop, Button, CircularProgress, Grid, IconButton, List, Paper, Snackbar, TextField, Tooltip, Typography, ListItem } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import MuiAlert from '@material-ui/lab/Alert';
 import makeStyles from '@material-ui/styles/makeStyles';
 import React, { useEffect, useRef } from 'react';
-import { addValue, changeAction, doneAction, startAction } from './actions/actions';
+import { addValue, changeAction, doneAction, startAction, removeValue } from './actions/actions';
 import { connect } from 'react-redux';
 
 const useStyles = makeStyles( (theme) => {
@@ -17,12 +18,16 @@ const useStyles = makeStyles( (theme) => {
       },
       item: {
         margin: '10px'
+      },
+      listItem: {
+        border: 'solid 1px',
+        marginBottom: '5px'
       }
     }
 });
 
 const Sfo = function Sfo(props) {
-  console.log("START SFO APP");
+  console.log("START SFO APP", props);
   const {max, sum, form, values, saga} = props; 
 
   useEffect( () => {
@@ -34,7 +39,7 @@ const Sfo = function Sfo(props) {
   });
 
   const classes = useStyles();
-  const ref = useRef(null);
+  const inputEl = useRef(null);
   return (
     <div>
       <Snackbar open={saga.waiting === 'DONE'}>
@@ -72,11 +77,11 @@ const Sfo = function Sfo(props) {
         </Grid>
         <Grid container>
           <Grid item className={classes.item}>
-            <TextField variant={'standard'} label={"VALORE"} inputRef={ref} />
+            <TextField variant={'standard'} label={"VALORE"} inputRef={inputEl} />
           </Grid>
           <Grid item className={classes.item}>
             <Tooltip title="Aggiungi valore">
-              <IconButton color="primary" aria-label="upload picture" coponent="span" onClick={() => props.dispatch(addValue(ref.target.value))}>
+              <IconButton color="primary" aria-label="upload picture" component="span" onClick={() => props.dispatch(addValue(inputEl.current.value))}>
                 <AddCircleIcon fontSize="large" />
               </IconButton>
             </Tooltip>
@@ -85,8 +90,15 @@ const Sfo = function Sfo(props) {
         <Grid container>
           <Grid item xs={6}>
             <List>
-              {values.map(item => (
-                {item}
+              {values.map( (value, index) => (
+                <ListItem className={classes.listItem} button key={index}>
+                  <Grid xs={11}>{value}</Grid>
+                  <Grid xs={1}>
+                    <IconButton color="primary" aria-label="upload picture" component="span" onClick={() => props.dispatch(removeValue(index))}>
+                      <RemoveCircleIcon fontSize="large" />
+                    </IconButton>
+                  </Grid>  
+                </ListItem>
                 ))}
             </List>
           </Grid>
