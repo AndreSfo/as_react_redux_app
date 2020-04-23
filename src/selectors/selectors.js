@@ -1,16 +1,28 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { createStructuredSelector } from 'reselect';
 
-const selector1 = state => state.v1;
+const selector1 = state => {
+    if (state.form && state.form.v1) {
+        return parseInt(state.form.v1);
+    } else {
+        return 0;
+    }
+};
 
-const selector2 = state => state.v2;
+const selector2 = state => {
+    if (state.form && state.form.v2) {
+        return parseInt(state.form.v2);
+    } else {
+        return 0;
+    }
+};
 
 const selector3 = createSelector(
     [selector1, selector2],
     (s1, s2) => s1+s2
 );
 
-const selector4 = state => state.v;
+const selector4 = state => state.values;
 
 const selector5 = createSelector(
     selector4,

@@ -111,14 +111,16 @@ const Sfo = function Sfo(props) {
   )
 };
 
-const mapStateToProps = state => {
-  return {
-    max: 0,
-    sum: 0,
-    form: state.form,
-    values: state.values,
-    saga: state.sagaStatus
-  }
-}
+const mapStateToProps =  selector10;
+
+// const mapStateToProps = state => {
+//   return {
+//     max: 0,
+//     sum: 0,
+//     form: state.form,
+//     values: state.values,
+//     saga: state.sagaStatus
+//   }
+// }
 
 export default connect(mapStateToProps)(Sfo);
