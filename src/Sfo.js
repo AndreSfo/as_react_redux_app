@@ -8,7 +8,7 @@ import { addValue, changeAction, doneAction, startAction, removeValue } from './
 import { selector10 } from './selectors/selectors';
 import { connect } from 'react-redux';
 
-const useStyles = makeStyles( (theme) => {
+const useStyles = makeStyles( (theme) => { 
     return {
       header : {
         padding: '20px',
