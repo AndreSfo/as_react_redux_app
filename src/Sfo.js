@@ -93,8 +93,8 @@ const Sfo = function Sfo(props) {
             <List>
               {values.map( (value, index) => (
                 <ListItem className={classes.listItem} button key={index}>
-                  <Grid xs={11}>{value}</Grid>
-                  <Grid xs={1}>
+                  <Grid item xs={11}>{value}</Grid>
+                  <Grid item xs={1}>
                     <IconButton color="primary" aria-label="upload picture" component="span" onClick={() => props.dispatch(removeValue(index))}>
                       <RemoveCircleIcon fontSize="large" />
                     </IconButton>
